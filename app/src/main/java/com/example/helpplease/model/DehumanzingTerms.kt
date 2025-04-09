@@ -23,13 +23,17 @@ object DehumanizingTerms {
 
 // Document processing model classes
 data class DocumentProcessingRequest(
-    val documentText: String,
+    val documentText: String,              // Raw text for processing
+    val formattedText: String? = null,     // HTML-formatted text (optional)
     val personName: String,
-    val selectedTermsToReplace: List<String> = DehumanizingTerms.commonTerms.keys.toList()
+    val selectedTermsToReplace: List<String> = DehumanizingTerms.commonTerms.keys.toList(),
+    val originalFormat: String? = null     // Original document format (MIME type)
 )
 
 data class DocumentProcessingResult(
     val originalText: String,
     val processedText: String,
-    val replacementsMade: Map<String, Int> // Term -> Count of replacements
+    val formattedProcessedText: String? = null,  // HTML-formatted processed text
+    val replacementsMade: Map<String, Int>,      // Term -> Count of replacements
+    val originalFormat: String? = null           // Original document format (MIME type)
 )
